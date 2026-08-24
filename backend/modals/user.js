@@ -28,13 +28,12 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
-    role: {
-      type: String,
-      default: 'user',
-    },
+    isAdmin:{
+        type: Boolean,
+        default: false
   },
-  { timestamps: true }
-);
+
+}, {timestamps: true});
 
 const User = mongoose.model('User', userSchema);
 
