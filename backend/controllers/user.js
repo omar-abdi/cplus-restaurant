@@ -1,6 +1,6 @@
 import User from '../modals/user.js';
 import bcrypt from 'bcryptjs';
-
+import jwt from 'jsonwebtoken';
      export const Signup = async (req, res) => {
   const { name, email, password, phone, address ,isAdmin } = req.body;
 
