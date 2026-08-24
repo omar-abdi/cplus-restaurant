@@ -9,7 +9,12 @@ import bcrypt from 'bcryptjs';
       message: 'Please fill in all fields',
     });
   }
-
+const existingUser = await User.findOne({ email });
+if (existingUser) {
+  return res.status(400).json({
+    message: 'User already exists',
+  });
+}
   try {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -20,6 +25,7 @@ import bcrypt from 'bcryptjs';
       password: hashedPassword,
       phone,
       address,
+      isAdmin
     });
 
     const savedUser = await user.save();
