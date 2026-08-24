@@ -1,7 +1,7 @@
 
 import {Router} from 'express';
-import {createmenu ,getfood} from '../controllers/food.js';
+import {createmenu ,getProduct} from '../controllers/food.js';
 const router = Router();    
 router.post("/createmenu" , createmenu);
-router.get("/getfood" , getfood);
+router.get("/product" , getProduct);
 export default router;
