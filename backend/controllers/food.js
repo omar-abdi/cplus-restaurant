@@ -1,13 +1,13 @@
-import Food from '../modals/food.js';
+import Product from '../modals/food.js';
 
   export    const createmenu = async (req, res) => {
   try {
-    const food = new Food(req.body);
-    await car.save();
+    const product = new Product(req.body);
+    await product.save();
     res.status(201).json({
       success: true,
       message: "food created successfully", 
-      data: food,
+      data: product,
     });
   } catch (err) {
     console.error(err);
@@ -17,11 +17,11 @@ import Food from '../modals/food.js';
 
 export const getfood = async (req, res) => {
   try {
-    const food = await Food.find();
+    const product = await Product.find();
     res.status(200).json({
       success: true,
       message: "food fetched successfully",
-      data: food,
+      data: product,
     });
   } catch (err) {
     console.error(err);
