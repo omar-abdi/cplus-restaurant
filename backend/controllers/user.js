@@ -1,7 +1,7 @@
 import User from '../modals/user.js';
 import bcrypt from 'bcryptjs';
 
-const Signup = async (req, res) => {
+     export const Signup = async (req, res) => {
   const { name, email, password, phone, address ,isAdmin } = req.body;
 
   if (!name || !email || !password || !phone || !address) {
@@ -35,10 +35,10 @@ const Signup = async (req, res) => {
 };
 
 
-export default Signup;
+
 
 // login 
-const Login = async (req, res) => {
+  export const Login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -73,4 +73,3 @@ const Login = async (req, res) => {
   }
 };
 
-export default Login;
