@@ -61,9 +61,23 @@ import bcrypt from 'bcryptjs';
         message: 'Incorrect password',
       });
     }
+    const token = jwt.sign({
+     id: user._id }, 
+     process.env.JWT_SECRET,  )
+     
+res.cookie('access_token' , token , { 
+  httpOnly: true,
+  sameSite: 'lax',
+  maxAge: 1000 * 60 * 60 * 24 * 30,
+  path: '/'
+});
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    res.status(200).json({ token });
+res.status(200).json({
+  message: 'User logged in successfully',
+  data: user,
+});
+
+  
   } catch (err) {
     console.log(err);
 
