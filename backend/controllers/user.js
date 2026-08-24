@@ -2,7 +2,7 @@ import User from '../modals/user.js';
 import bcrypt from 'bcryptjs';
 
 const Signup = async (req, res) => {
-  const { name, email, password, phone, address } = req.body;
+  const { name, email, password, phone, address ,isAdmin } = req.body;
 
   if (!name || !email || !password || !phone || !address) {
     return res.status(400).json({
@@ -33,3 +33,44 @@ const Signup = async (req, res) => {
     });
   }
 };
+
+
+export default Signup;
+
+// login 
+const Login = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({
+      message: 'Please fill in all fields',
+    });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        message: 'Incorrect password',
+      });
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    res.status(200).json({ token });
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      message: 'Error logging in user',
+    });
+  }
+};
+
+export default Login;
