@@ -1,6 +1,6 @@
 import Product from '../modals/food.js';
 
-  export    const createmenu = async (req, res) => {
+  export  const createmenu = async (req, res) => {
   try {
     const product = new Product(req.body);
     await product.save();
@@ -15,7 +15,7 @@ import Product from '../modals/food.js';
   }
 };
 
-export const getfood = async (req, res) => {
+export const getProduct = async (req, res) => {
   try {
     const product = await Product.find();
     res.status(200).json({
