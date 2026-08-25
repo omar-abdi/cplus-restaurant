@@ -1,11 +1,12 @@
 
 import {Routes, Route} from 'react-router-dom'
-import Meals from './pages/Melas'
+import MealsComponent from './pages/Melas'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Details from './pages/Details'
+import Drinks from './pages/Drinks'
 const App = () => {
   return (
     <div>
@@ -17,7 +18,8 @@ const App = () => {
         <Route   path="/login" element={<Login />} />
         <Route   path="/signup" element={<Signup />} />
         <Route   path="/details" element={<Details />} />
-        <Route path="/meals" element={<Meals />} />
+        <Route   path="/drinks" element={<Drinks />} />
+        <Route path="/meals" element={<MealsComponent />} />
       </Routes> 
     </div>
   )

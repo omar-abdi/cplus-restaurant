@@ -13,19 +13,18 @@ const storeDrinks = create((set) => ({
     });
 
     try {
-      const res = await axios.get("http://localhost:5000/api/drinks/add");
+      const res = await axios.get("http://localhost:5000/api/drinks/get");
 
-      // Log tan si aad console-ka uga aragto waxa uu API-gu soo celinayo
       console.log("Backend Response:", res.data);
 
-      // Hadii Backend-ku soo celiyo { products: [...] } ama { meals: [...] }
-      // U beddel `res.data.products` ama property-ga saxda ah oo array-ga ah:
+      // Backend-ku wuxuu soo celinayaa { success: true, message: "...", data: [...] }
+      // Sidaas darteed res.data.data ayaa ah array-ga dhabta ah
       const drinkData = Array.isArray(res.data) 
         ? res.data 
-        : res.data.products || res.data.meals || res.data.data || [];
+        : res.data.data || res.data.products || res.data.meals || [];
 
       set({
-        meals: drinkData,
+        drinks: drinkData, // Halkan waxaa ku qornayd 'meals' - oo ah 'drinks'
         loading: false,
         error: null,
       });
@@ -33,10 +32,10 @@ const storeDrinks = create((set) => ({
       set({
         loading: false,
         error: error.response?.data?.message || error.message,
-        meals: [], // Ka hortag in uu undefined ama null noqdo
+        drinks: [], // Halkan lagu sameeyay 'drinks'
       });
     }
   },
 }));
 
-export default storeMeals;
+export default storeDrinks;

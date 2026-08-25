@@ -17,7 +17,7 @@ import Drinks from '../modals/drinks.js';
 };
 export const getDrinks = async (req, res) => {
   try {
-    const drinks = await Product.find();
+    const drinks = await Drinks.find(); 
     res.status(200).json({
       success: true,
       message: "drinks fetched successfully",

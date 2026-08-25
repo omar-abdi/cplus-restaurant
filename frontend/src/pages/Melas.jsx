@@ -1,8 +1,8 @@
-import Meals from '../zustand/meals'
-import { useEffect } from 'react'
 
+import { useEffect } from 'react'
+import storeMeals from "../zustand/meals"
 function MealsComponent() {
-  const { meals, getMeals } = Meals()
+  const { meals, getMeals } = storeMeals()
 
   useEffect(() => {
     getMeals()
