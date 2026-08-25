@@ -1,107 +1,165 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <div className="min-h-screen bg-gray-100">
+
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-40 h-screen bg-white shadow-lg transition-all duration-300 ${
+        className={`fixed left-0 top-0 z-50 h-screen border-r border-gray-200 bg-white shadow-sm transition-all duration-300 ${
           open ? "w-64" : "w-20"
         }`}
       >
-        {/* Logo / Header */}
+        {/* Logo */}
         <div className="flex h-20 items-center justify-between border-b px-4">
           {open && (
-            <h1 className="text-xl font-bold text-gray-800">
-              Cplus  
-              <span className="text-orange-500">Restaurant</span>
-            </h1>
+            <div>
+              <h1 className="text-xl font-bold text-gray-800">
+                Cplus
+                <span className="text-orange-500"> Restaurant</span>
+              </h1>
+
+              <p className="text-xs text-gray-400">
+                Management
+              </p>
+            </div>
           )}
 
           <button
             onClick={() => setOpen(!open)}
-            className="rounded-lg p-2 text-gray-600 hover:bg-gray-100"
+            className="rounded-xl p-2 text-gray-600 transition hover:bg-gray-100"
           >
             ☰
           </button>
         </div>
 
-        {/* Links */}
+        {/* Sidebar Links */}
         <nav className="mt-6 space-y-2 px-3">
+
+          {/* Dashboard */}
           <Link
             to="/dashboard"
-            className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
+            className={`flex items-center gap-3 rounded-xl px-3 py-3 transition ${
+              isActive("/dashboard")
+                ? "bg-orange-50 text-orange-600"
+                : "text-gray-600 hover:bg-gray-50"
+            }`}
           >
-            <span>🏠</span>
+            <span className="text-xl">🏠</span>
 
-            {open && <span>Dashboard</span>}
+            {open && (
+              <span className="font-medium">
+                Dashboard
+              </span>
+            )}
           </Link>
 
+          {/* Orders */}
           <Link
             to="/dashboard/orders"
-            className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
+            className={`flex items-center gap-3 rounded-xl px-3 py-3 transition ${
+              isActive("/dashboard/orders")
+                ? "bg-orange-50 text-orange-600"
+                : "text-gray-600 hover:bg-gray-50"
+            }`}
           >
-            <span>📦</span>
+            <span className="text-xl">📦</span>
 
-            {open && <span>Orders</span>}
+            {open && (
+              <span className="font-medium">
+                Orders
+              </span>
+            )}
           </Link>
 
-      <Link
-  to="/dashboard/addfood"
-  className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
->
-  <span>🍔</span>
+          {/* Add Food */}
+          <Link
+            to="/dashboard/addfood"
+            className={`flex items-center gap-3 rounded-xl px-3 py-3 transition ${
+              isActive("/dashboard/addfood")
+                ? "bg-orange-50 text-orange-600"
+                : "text-gray-600 hover:bg-gray-50"
+            }`}
+          >
+            <span className="text-xl">🍔</span>
 
-  {open && <span>Add Food</span>}
-</Link>
+            {open && (
+              <span className="font-medium">
+                Add Food
+              </span>
+            )}
+          </Link>
 
-<Link
-  to="/dashboard/add-drink"
-  className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
->
-  <span>🥤</span>
+          {/* Add Drink */}
+          <Link
+            to="/dashboard/add-drink"
+            className={`flex items-center gap-3 rounded-xl px-3 py-3 transition ${
+              isActive("/dashboard/add-drink")
+                ? "bg-orange-50 text-orange-600"
+                : "text-gray-600 hover:bg-gray-50"
+            }`}
+          >
+            <span className="text-xl">🥤</span>
 
-  {open && <span>Drinks</span>}
-</Link>
+            {open && (
+              <span className="font-medium">
+                Add Drink
+              </span>
+            )}
+          </Link>
 
+          {/* Profile */}
           <Link
             to="/dashboard/profile"
-            className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
+            className={`flex items-center gap-3 rounded-xl px-3 py-3 transition ${
+              isActive("/dashboard/profile")
+                ? "bg-orange-50 text-orange-600"
+                : "text-gray-600 hover:bg-gray-50"
+            }`}
           >
-            <span>👤</span>
+            <span className="text-xl">👤</span>
 
-            {open && <span>Profile</span>}
+            {open && (
+              <span className="font-medium">
+                Profile
+              </span>
+            )}
           </Link>
+
         </nav>
       </aside>
 
-      {/* Main Content */}
+      {/* Right Side */}
       <main
         className={`min-h-screen transition-all duration-300 ${
           open ? "ml-64" : "ml-20"
         }`}
       >
-        {/* Top bar */}
-        <header className="flex h-20 items-center justify-between border-b bg-white px-6">
+        {/* Top Header */}
+        <header className="flex h-20 items-center border-b border-gray-200 bg-white px-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-xl font-bold text-gray-800">
               Restaurant Dashboard
             </h2>
 
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-400">
               Manage your restaurant
             </p>
           </div>
         </header>
 
-        {/* Page content */}
+        {/* Child Pages Open Here */}
         <section className="p-6">
           <Outlet />
         </section>
       </main>
+
     </div>
   );
 };

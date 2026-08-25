@@ -12,8 +12,9 @@ import Cart from "./pages/cart";
 import Dashboard from "./pages/dashbroad";
 import Addfood from "./pages/Addfood";
 import Adddrink from "./pages/Adddrink";
-
 import Profile from "./pages/Profile";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -21,20 +22,32 @@ const App = () => {
       <Navbar />
 
       <Routes>
+
+        {/* Public */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/details" element={<Details />} />
-        <Route path="/drinks" element={<Drinks />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/meals" element={<MealsComponent />} />
 
-        {/* Dashboard */}
-        <Route path="/dashboard" element={<Dashboard />}>
-  <Route path="addfood" element={<Addfood />} />
-  <Route path="add-drink" element={<Adddrink />} />
-  <Route path="profile" element={<Profile />} />
-</Route>
+        {/* Protected pages */}
+        <Route element={<ProtectedRoute />}>
+
+          <Route path="/details" element={<Details />} />
+          <Route path="/drinks" element={<Drinks />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/meals" element={<MealsComponent />} />
+
+          {/* Dashboard Parent */}
+          <Route path="/dashboard" element={<Dashboard />}>
+
+            {/* Dashboard children */}
+            <Route path="addfood" element={<Addfood />} />
+            <Route path="add-drink" element={<Adddrink />} />
+            <Route path="profile" element={<Profile />} />
+
+          </Route>
+
+        </Route>
+
       </Routes>
     </div>
   );
