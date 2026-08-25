@@ -1,12 +1,19 @@
 
 import Order from "../modals/order.js";
-import Product from "../modals/product.js";
+import Product from "../modals/food.js";
+import mongoose from "mongoose";
 
 export const createOrder = async (req, res) => {
   try {
     const { items } = req.body;
 
-    if (!items || items.length === 0) {
+    if (!req.user?.id) {
+      return res.status(401).json({
+        message: "You are not authorized",
+      });
+    }
+
+    if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({
         message: "Order items are required",
       });
@@ -16,6 +23,20 @@ export const createOrder = async (req, res) => {
     let totalPrice = 0;
 
     for (const item of items) {
+      const quantity = Number(item.quantity);
+
+      if (!item.product || !Number.isInteger(quantity) || quantity < 1) {
+        return res.status(400).json({
+          message: "Each item must include a product and a quantity of at least 1",
+        });
+      }
+
+      if (!mongoose.Types.ObjectId.isValid(item.product)) {
+        return res.status(400).json({
+          message: "Each product must have a valid ID",
+        });
+      }
+
       const product = await Product.findById(item.product);
 
       if (!product) {
@@ -28,14 +49,14 @@ export const createOrder = async (req, res) => {
         product: product._id,
         name: product.name,
         price: product.price,
-    description: product.description,
+        quantity,
       });
 
-      totalPrice += product.price * item.quantity;
+      totalPrice += product.price * quantity;
     }
 
     const order = await Order.create({
-      user: req.user._id,
+      user: req.user.id,
       items: orderItems,
       totalPrice,
     });

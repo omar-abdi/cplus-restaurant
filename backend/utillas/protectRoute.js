@@ -1,11 +1,17 @@
 import jwt from "jsonwebtoken";
 
 export const protectRoute = (req, res, next) => {
-  const token = req.cookies.access_token;
+  const token = req.cookies?.access_token;
 
   if (!token) {
     return res.status(401).json({
       message: "You are not authorized",
+    });
+  }
+
+  if (!process.env.JWT_SECRET) {
+    return res.status(500).json({
+      message: "JWT_SECRET is not configured",
     });
   }
 
