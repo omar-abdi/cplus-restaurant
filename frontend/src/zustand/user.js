@@ -1,36 +1,39 @@
 import {create} from "zustand"
  import axios from "axios"
 
-const useUser = create((set) => ({
+const storeUser = create((set) => ({
 	user: JSON.parse(localStorage.getItem('user'))|| null,
 	loading: false,
 	error: null,
 
-	Signup: async ( name ,email, password ,phone ,address) => {
+	Signup: async (formData) => {
 		set({loading: true, error: null})
 
 		try {
-			const res = await axios.post('http://localhost:5000/api/user/signup', {email, password , name , phone , address})
+			const res = await axios.post('http://localhost:5000/api/user/signup', formData)
 			set({
-                user: res.data.user, 
+                user: res.data,
                 loading: false})
-            //local stoare
+			localStorage.setItem('user', JSON.stringify(res.data))
+			return true
 
 		} catch (error) {
 			set({loading: false, error: error.response?.data?.message || error.message})
+			return false
 		}
 	},
 Login: async (email, password) => {
 		set({loading: true, error: null})
 		try {
-			const res = await axios.post('http://localhost:5000/api/user/login', {email, password})
+			const res = await axios.post('http://localhost:5000/api/user/login', {email, password}, { withCredentials: true })
 			set({
-                user: res.data.user, 
+                user: res.data.data,
                 loading: false})
-            //local stoare
-            localStorage.setItem('user', JSON.stringify(res.data.user))
+			localStorage.setItem('user', JSON.stringify(res.data.data))
+			return true
 		} catch (error) {
 			set({loading: false, error: error.response?.data?.message || error.message})
+			return false
 		}
 	},
 	logout: () => {
@@ -39,6 +42,6 @@ Login: async (email, password) => {
 }))
 
 
-export default useUser
+export default storeUser
 
 
