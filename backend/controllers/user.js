@@ -40,10 +40,22 @@ if (existingUser) {
   }
 };
 
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password").sort({ createdAt: -1 });
 
+    res.status(200).json({
+      message: "Users retrieved successfully",
+      users,
+    });
+  } catch (err) {
+    console.log(err);
 
-
-// login 
+    res.status(500).json({
+      message: "Failed to retrieve users",
+    });
+  }
+}; 
   export const Login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -67,9 +79,10 @@ if (existingUser) {
         message: 'Incorrect password',
       });
     }
-    const token = jwt.sign({
-     id: user._id }, 
-     process.env.JWT_SECRET,  )
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET
+    );
      
 res.cookie('access_token' , token , { 
   httpOnly: true,

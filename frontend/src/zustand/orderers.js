@@ -9,6 +9,7 @@ const storeOrders = create(
     (set, get) => ({
       cartItems: [],
       creatingOrder: false,
+      loadingOrders: false,
       orderError: null,
       createdOrder: null,
 
@@ -118,6 +119,26 @@ const storeOrders = create(
           });
 
           return null;
+        }
+      },
+
+      getOrders: async (userId) => {
+        set({ loadingOrders: true, orderError: null });
+
+        try {
+          const response = await axios.get(`${API_URL}/user/${userId}`, {
+            withCredentials: true,
+          });
+
+          set({ loadingOrders: false });
+          return response.data.orders || [];
+        } catch (error) {
+          set({
+            loadingOrders: false,
+            orderError:
+              error.response?.data?.message || "Failed to load orders",
+          });
+          return [];
         }
       },
     }),

@@ -37,13 +37,20 @@ const Navbar = () => {
           <Home size={19} />
           Home
         </Link>
+        <Link
+          to="/dashboard"
+          className="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition"
+        >
+          <Home size={19} />
+          dashboard
+        </Link>
 
         <Link
           to="/meals"
           className="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition"
         >
           <Utensils size={19} />
-          Meals
+          Foods
         </Link>
         <Link
           to="/drinks"
