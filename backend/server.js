@@ -5,12 +5,15 @@ import connectDB from './db.js';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.js';
 import foodRoutes from './routes/food.js';
+import cors from 'cors';
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 import dns from "dns";
 dotenv.config();
 const app = express();
 app.use(cookieParser());
 app.use(express.json())
+app.use(cors());
 
 
 const PORT = process.env.PORT || 8000;

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const meals = create((set) => ({
+const storeMeals = create((set) => ({
   meals: [],
   loading: false,
   error: null,
@@ -13,20 +13,30 @@ const meals = create((set) => ({
     });
 
     try {
-      const res = await axios.get("http://localhost:5000/api/product");
+      const res = await axios.get("http://localhost:5000/api/food/product");
+
+      // Log tan si aad console-ka uga aragto waxa uu API-gu soo celinayo
+      console.log("Backend Response:", res.data);
+
+      // Hadii Backend-ku soo celiyo { products: [...] } ama { meals: [...] }
+      // U beddel `res.data.products` ama property-ga saxda ah oo array-ga ah:
+      const mealsData = Array.isArray(res.data) 
+        ? res.data 
+        : res.data.products || res.data.meals || res.data.data || [];
 
       set({
-        meals: res.data,
+        meals: mealsData,
         loading: false,
         error: null,
       });
     } catch (error) {
       set({
         loading: false,
-        error: error.message,
+        error: error.response?.data?.message || error.message,
+        meals: [], // Ka hortag in uu undefined ama null noqdo
       });
     }
   },
 }));
 
-export default meals;
+export default storeMeals;
