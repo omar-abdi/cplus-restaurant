@@ -3,7 +3,7 @@ import { create } from 'zustand'
 
 const API_URL = 'http://localhost:5000/api/order'
 
-const useOrders = create((set, get) => ({
+const storeOrders = create((set, get) => ({
 	cartItems: [],
 	creatingOrder: false,
 	orderError: null,
@@ -74,4 +74,4 @@ const useOrders = create((set, get) => ({
 	},
 }))
 
-export default useOrders
+export default storeOrders

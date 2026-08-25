@@ -1,7 +1,9 @@
 
 import Order from "../modals/order.js";
 import Product from "../modals/food.js";
+import Drinks from "../modals/drinks.js";
 import mongoose from "mongoose";
+
 
 export const createOrder = async (req, res) => {
   try {
@@ -25,19 +27,35 @@ export const createOrder = async (req, res) => {
     for (const item of items) {
       const quantity = Number(item.quantity);
 
-      if (!item.product || !Number.isInteger(quantity) || quantity < 1) {
+      if (
+        !item.product ||
+        !item.itemModel ||
+        !Number.isInteger(quantity) ||
+        quantity < 1
+      ) {
         return res.status(400).json({
-          message: "Each item must include a product and a quantity of at least 1",
+          message:
+            "Each item must include product, itemModel and quantity of at least 1",
         });
       }
 
       if (!mongoose.Types.ObjectId.isValid(item.product)) {
         return res.status(400).json({
-          message: "Each product must have a valid ID",
+          message: "Invalid product ID",
         });
       }
 
-      const product = await Product.findById(item.product);
+      let product;
+
+      if (item.itemModel === "Prod") {
+        product = await Product.findById(item.product);
+      } else if (item.itemModel === "Drinks") {
+        product = await Drinks.findById(item.product);
+      } else {
+        return res.status(400).json({
+          message: "Invalid item model",
+        });
+      }
 
       if (!product) {
         return res.status(404).json({
@@ -47,6 +65,7 @@ export const createOrder = async (req, res) => {
 
       orderItems.push({
         product: product._id,
+        itemModel: item.itemModel,
         name: product.name,
         price: product.price,
         quantity,
