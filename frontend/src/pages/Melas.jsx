@@ -1,8 +1,10 @@
 
 import { useEffect } from 'react'
 import storeMeals from "../zustand/meals"
+import useOrders from '../zustand/orderers'
 function MealsComponent() {
   const { meals, getMeals } = storeMeals()
+  const { cartItems, addToCart } = useOrders()
 
   useEffect(() => {
     getMeals()
@@ -47,8 +49,19 @@ function MealsComponent() {
                 </div>
 
                 <p className="mt-2 line-clamp-2 text-sm text-[#2B1B14]/60">
-                  {meal.description}
+                  {meal.description || 'Prepared fresh in our kitchen.'}
                 </p>
+
+                <button
+                  type="button"
+                  onClick={() => addToCart(meal)}
+                  className="mt-5 flex items-center gap-2 rounded-full bg-[#2B1B14] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#C98A3D]"
+                >
+                  <span className="text-lg leading-none">+</span>
+                  {cartItems.find((item) => item.product === (meal._id || meal.id))
+                    ? 'Added to cart'
+                    : 'Add to cart'}
+                </button>
               </div>
 
             </div>
