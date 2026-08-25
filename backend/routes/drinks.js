@@ -1,7 +1,8 @@
 import {Router} from 'express';
+import {createDrink} from '../controllers/drinks.js';
 const router = Router();
 
-router.post("/drinks",CreateDrink);
+router.post("/add",createDrink);
 
 
 
