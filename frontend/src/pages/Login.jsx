@@ -1,40 +1,34 @@
 import { useState } from 'react'
 import { Mail, Lock, LogIn, Eye, EyeOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import storeUser from '../zustand/user'
+
 function Login() {
-    const navigate = useNavigate(  )
+  const navigate = useNavigate()
+  const { Login, loading, error } = storeUser()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
   const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
-    if(!formData.email || !formData.password){ 
-        setError("Please fill in all fields")
-        return
-     }
-       if (success) {
-        setFormData({
-          name: '',
-          email: '',
-          password: '',
-          phone: '',
-          address: '',
-        })
-navigate("/")
 
-      }      
+    if (!formData.email || !formData.password) {
+      return
+    }
 
+    const success = await Login(formData.email, formData.password)
 
-   
+    if (success) {
+      setFormData({ email: '', password: '' })
+      navigate('/')
+    }
   }
 
   return (
@@ -96,6 +90,12 @@ navigate("/")
               </button>
             </div>
           </div>
+
+          {error && (
+            <p role="alert" className="border-l-2 border-red-500 bg-red-50 px-3 py-2 text-sm text-red-700">
+              {error}
+            </p>
+          )}
 
           {/* Submit Button */}
           <button

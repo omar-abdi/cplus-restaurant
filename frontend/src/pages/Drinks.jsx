@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import storeDrinks from "../zustand/drinks"
 import { ShoppingCart, Heart, Star } from 'lucide-react'
-import
+import storeOrders from '../zustand/orderers'
 function Drinks() {
   const { drinks, getDrinks } = storeDrinks()
+  const { cartItems, addToCart } = storeOrders()
 
   useEffect(() => {
     getDrinks()
@@ -59,8 +60,7 @@ function Drinks() {
               </p>
 
               {/* Add to cart button */}
-              <button
-                type="button"
+              <button onClick={() => addToCart(drink ,"Drinks")} type="button"
                 className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#2B1B14] py-2.5 text-sm font-medium text-white transition hover:bg-[#C98A3D]"
               >
                 <ShoppingCart className="h-4 w-4" />

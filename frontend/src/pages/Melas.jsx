@@ -56,7 +56,7 @@ function MealsComponent() {
 
                 <button
                   type="button"
-                  onClick={() => addToCart(meal)}
+                  onClick={() => addToCart(meal ,"Prod")}
                   className="mt-5 flex items-center gap-2 rounded-full bg-[#2B1B14] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#C98A3D]"
                 >
                   <span className="text-lg leading-none">+</span>
