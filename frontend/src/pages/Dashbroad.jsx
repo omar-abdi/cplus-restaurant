@@ -49,23 +49,23 @@ const Dashboard = () => {
             {open && <span>Orders</span>}
           </Link>
 
-          <Link
-            to="/dashboard/Addfood"
-            className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
-          >
-            <span>🍔</span>
+      <Link
+  to="/dashboard/addfood"
+  className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
+>
+  <span>🍔</span>
 
-            {open && <span>Food</span>}
-          </Link>
+  {open && <span>Add Food</span>}
+</Link>
 
-          <Link
-            to="/dashboard/drinks"
-            className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
-          >
-            <span>🥤</span>
+<Link
+  to="/dashboard/add-drink"
+  className="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-700 hover:bg-gray-100"
+>
+  <span>🥤</span>
 
-            {open && <span>Drinks</span>}
-          </Link>
+  {open && <span>Drinks</span>}
+</Link>
 
           <Link
             to="/dashboard/profile"
