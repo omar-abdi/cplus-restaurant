@@ -93,9 +93,10 @@ export const createOrder = async (req, res) => {
   }
 };
 
-   export const    getallOrders = async (req, res) => {
+  export const getallOrders = async (req, res) => {
   try {
-    const orders = await Order.find({});
+    const orders = await Order.find({})
+      .populate("user", "name phone address");
 
     res.status(200).json({
       message: "Orders retrieved successfully",
@@ -108,7 +109,7 @@ export const createOrder = async (req, res) => {
       message: "Failed to retrieve orders",
     });
   }
-}; 
+};
 //get user his order only
 
 export const getUserOrders = async (req, res) => {

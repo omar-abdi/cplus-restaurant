@@ -15,6 +15,7 @@ import Adddrink from "./pages/Adddrink";
 import Profile from "./pages/Profile";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import GetOrders from "./pages/GetOrders";
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
             {/* Dashboard children */}
             <Route path="addfood" element={<Addfood />} />
             <Route path="add-drink" element={<Adddrink />} />
+            <Route path="orders" element={<GetOrders />} />
             <Route path="profile" element={<Profile />} />
 
           </Route>
