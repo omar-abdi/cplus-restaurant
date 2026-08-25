@@ -73,3 +73,55 @@ export const createOrder = async (req, res) => {
     });
   }
 };
+
+   export const    getallOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({});
+
+    res.status(200).json({
+      message: "Orders retrieved successfully",
+      orders,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Failed to retrieve orders",
+    });
+  }
+}; 
+//get user his order only
+
+export const getUserOrders = async (req, res) => {
+  try {
+    if (req.user?.isAdmin) {
+      const orders = await Order.find();
+
+      return res.status(200).json({
+        message: "All orders retrieved successfully",
+        orders,
+      });
+    }
+
+    if (req.user?.id === req.params.id) {
+      const orders = await Order.find({
+        user: req.user.id,
+      });
+
+      return res.status(200).json({
+        message: "Orders retrieved successfully",
+        orders,
+      });
+    } else {
+      return res.status(401).json({
+        message: "You are not authorized",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Failed to retrieve orders",
+    });
+  }
+};
