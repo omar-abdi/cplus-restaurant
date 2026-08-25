@@ -1,10 +1,12 @@
 
 import { useEffect } from 'react'
 import storeMeals from "../zustand/meals"
-import useOrders from '../zustand/orderers'
+import storeOrders from '../zustand/orderers'
+
 function MealsComponent() {
+
   const { meals, getMeals } = storeMeals()
-  const { cartItems, addToCart } = useOrders()
+  const { cartItems, addToCart } = storeOrders()
 
   useEffect(() => {
     getMeals()

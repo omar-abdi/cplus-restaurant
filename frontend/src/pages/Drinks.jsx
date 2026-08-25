@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import storeDrinks from "../zustand/drinks"
 import { ShoppingCart, Heart, Star } from 'lucide-react'
-
+import
 function Drinks() {
   const { drinks, getDrinks } = storeDrinks()
 
