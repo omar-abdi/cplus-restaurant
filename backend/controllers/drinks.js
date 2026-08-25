@@ -15,3 +15,16 @@ import Drinks from '../modals/drinks.js';
     res.status(500).json({ message: "Server error" });
   }
 };
+export const getDrinks = async (req, res) => {
+  try {
+    const drinks = await Product.find();
+    res.status(200).json({
+      success: true,
+      message: "drinks fetched successfully",
+      data: drinks,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
