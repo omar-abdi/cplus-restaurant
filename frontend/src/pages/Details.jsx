@@ -258,7 +258,7 @@ const Details = () => {
               </p>
 
               <h3 className="mt-1 text-xl font-bold text-white">
-                Taleex, Muqdisho
+                 Muqdisho Banaadir Digfer
               </h3>
 
               <p className="mt-2 text-sm text-slate-400">
@@ -278,13 +278,13 @@ const Details = () => {
 
               {/* CHANGE PHONE HERE */}
               <h3 className="mt-1 text-xl font-bold text-white">
-                +252 XX XXX XXXX
+                +252 6124800687
               </h3>
 
               {/* CHANGE EMAIL HERE */}
               <p className="mt-2 flex items-center gap-2 text-sm text-slate-400">
                 <Mail size={14} />
-                example@email.com
+                rayanabdi747@gmail.com
               </p>
             </div>
 
