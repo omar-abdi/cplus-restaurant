@@ -2,8 +2,6 @@
 
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export const sendContactEmail = async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
@@ -13,6 +11,19 @@ export const sendContactEmail = async (req, res) => {
         message: "Name, email, subject and message are required",
       });
     }
+
+    // dotenv.config() runs when the server starts. Creating Resend here avoids
+    // reading the key before that setup has completed during ESM module loading.
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
+      console.error("RESEND_API_KEY is not configured");
+      return res.status(500).json({
+        message: "Email service is not configured",
+      });
+    }
+
+    const resend = new Resend(apiKey);
 
     const { data, error } = await resend.emails.send({
       from: "onboarding@resend.dev",
