@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Mail, MapPin, Phone, Search, ShieldCheck, UsersRound } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Mail, MapPin, Pencil, Phone, Search, ShieldCheck, UsersRound } from "lucide-react";
 import storeUser from "../zustand/user";
 
 const getInitials = (name) =>
@@ -63,15 +64,16 @@ const Allusers = () => {
         <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center text-slate-500">No users found.</div>
       ) : (
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-          <div className="hidden grid-cols-[1.4fr_1.4fr_1.2fr_1.7fr_0.7fr] gap-4 border-b border-slate-100 bg-slate-50 px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-400 lg:grid"><span>User</span><span>Email</span><span>Phone</span><span>Address</span><span>Role</span></div>
+          <div className="hidden grid-cols-[1.3fr_1.3fr_1.1fr_1.5fr_0.7fr_0.65fr] gap-4 border-b border-slate-100 bg-slate-50 px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-400 lg:grid"><span>User</span><span>Email</span><span>Phone</span><span>Address</span><span>Role</span><span>Action</span></div>
           <div className="divide-y divide-slate-100">
             {filteredUsers.map((user) => (
-              <article key={user._id} className="grid gap-4 px-5 py-5 transition hover:bg-slate-50 lg:grid-cols-[1.4fr_1.4fr_1.2fr_1.7fr_0.7fr] lg:items-center lg:px-6">
+              <article key={user._id} className="grid gap-4 px-5 py-5 transition hover:bg-slate-50 lg:grid-cols-[1.3fr_1.3fr_1.1fr_1.5fr_0.7fr_0.65fr] lg:items-center lg:px-6">
                 <div className="flex items-center gap-3"><span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-orange-600 text-sm font-bold text-white">{getInitials(user.name)}</span><div className="min-w-0"><p className="truncate font-bold text-slate-800">{user.name}</p><p className="mt-0.5 text-xs text-slate-400">Joined {new Date(user.createdAt).toLocaleDateString()}</p></div></div>
                 <p className="flex items-center gap-2 break-all text-sm text-slate-600"><Mail size={15} className="shrink-0 text-slate-400 lg:hidden" />{user.email}</p>
                 <p className="flex items-center gap-2 text-sm text-slate-600"><Phone size={15} className="shrink-0 text-slate-400 lg:hidden" />{user.phone || "—"}</p>
                 <p className="flex items-start gap-2 text-sm text-slate-600"><MapPin size={15} className="mt-0.5 shrink-0 text-slate-400 lg:hidden" />{user.address || "—"}</p>
                 <span className={`inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold ${user.isAdmin ? "bg-violet-50 text-violet-700" : "bg-emerald-50 text-emerald-700"}`}>{user.isAdmin && <ShieldCheck size={14} />}{user.isAdmin ? "Admin" : "Customer"}</span>
+                <Link to={`/dashboard/users/${user._id}/update`} className="inline-flex w-fit items-center gap-1.5 rounded-xl bg-slate-900 px-3 py-2 text-xs font-bold text-white transition hover:bg-orange-500"><Pencil size={14} /> Update</Link>
               </article>
             ))}
           </div>

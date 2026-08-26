@@ -82,7 +82,7 @@ export const updateUser = async (req, res) => {
         if (address) {
             user.address = address;
         }
-        if (isAdmin) {
+        if (typeof isAdmin === "boolean") {
             user.isAdmin = isAdmin;
         }
         await user.save();

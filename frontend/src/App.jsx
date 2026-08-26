@@ -22,6 +22,7 @@ import Contactpage from "./pages/Contactpage";
 import GetOrderByUser from "./pages/GetOrderByUser";
 import UserDashboard from "./pages/UserDashboard";
 import Allusers from "./pages/Allusers";
+import UpdateUser from "./pages/UpdateUser";
 
 const App = () => {
   return (
@@ -69,6 +70,8 @@ const App = () => {
             <Route path="orders" element={<GetOrders />} />
 
             <Route path="users" element={<Allusers />} />
+
+            <Route path="users/:id/update" element={<UpdateUser />} />
 
             <Route path="profile" element={<Profile />} />
 
