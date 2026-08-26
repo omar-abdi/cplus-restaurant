@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 
 const foodSchema = new mongoose.Schema(
   {
+    title: {
+      type: String,
+     
+    },
     name: {
       type: String,
       required: true,

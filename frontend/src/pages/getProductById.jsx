@@ -43,7 +43,7 @@ const GetProductById = () => {
             <p className="mt-7 text-3xl font-bold text-[#C98A3D]">${product.price}</p>
             <button type="button" onClick={() => addToCart(product, "Prod")} className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#2B1B14] px-6 py-3 font-semibold text-white transition hover:bg-[#C98A3D]"><ShoppingCart size={18} /> Add to cart</button>
           </div>
-        </div>
+        </div> 
       </div>
     </section>
   );
