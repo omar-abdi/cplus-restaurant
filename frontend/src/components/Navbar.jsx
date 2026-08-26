@@ -40,7 +40,7 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-3">
           <div className="relative">
             <img
-              src="/logo.png"
+              src="/images/logo.png"
               alt="Cplus Restaurant"
               className="h-11 w-11 rounded-full object-cover ring-2 ring-orange-100"
             />
