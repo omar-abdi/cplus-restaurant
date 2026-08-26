@@ -99,7 +99,7 @@ const Details = () => {
             </h2>
 
             <p className="mt-5 leading-8 text-slate-600">
-              Cplus Restaurant is a restaurant located in Taleex,
+              Cplus Restaurant is a restaurant located in Banaadir Digfer,
               Muqdisho. Our goal is to provide delicious meals with
               great taste while giving every customer a comfortable
               and welcoming experience.
