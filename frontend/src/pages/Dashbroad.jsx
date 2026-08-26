@@ -80,6 +80,24 @@ const Dashboard = () => {
 
           {/* Add Food */}
           <Link
+            to="/dashboard/users"
+            className={`flex items-center gap-3 rounded-xl px-3 py-3 transition ${
+              isActive("/dashboard/users")
+                ? "bg-orange-50 text-orange-600"
+                : "text-gray-600 hover:bg-gray-50"
+            }`}
+          >
+            <span className="text-xl">Users</span>
+
+            {open && (
+              <span className="font-medium">
+                All Users
+              </span>
+            )}
+          </Link>
+
+          {/* Add Food */}
+          <Link
             to="/dashboard/addfood"
             className={`flex items-center gap-3 rounded-xl px-3 py-3 transition ${
               isActive("/dashboard/addfood")

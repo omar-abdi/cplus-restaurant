@@ -21,6 +21,7 @@ import GetDrinkById from "./pages/getDrinkById";
 import Contactpage from "./pages/Contactpage";
 import GetOrderByUser from "./pages/GetOrderByUser";
 import UserDashboard from "./pages/UserDashboard";
+import Allusers from "./pages/Allusers";
 
 const App = () => {
   return (
@@ -66,6 +67,8 @@ const App = () => {
             <Route path="add-drink" element={<Adddrink />} />
 
             <Route path="orders" element={<GetOrders />} />
+
+            <Route path="users" element={<Allusers />} />
 
             <Route path="profile" element={<Profile />} />
 
