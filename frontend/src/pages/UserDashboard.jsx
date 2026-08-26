@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   Menu,
   X,
@@ -7,14 +7,22 @@ import {
   ShoppingBag,
   User,
   Home,
+  LogOut,
   UtensilsCrossed,
 } from "lucide-react";
+import storeUser from "../zustand/user";
 
 const UserDashboard = () => {
   const [open, setOpen] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = storeUser();
 
   const isActive = (path) => location.pathname === path;
+  const handleLogout = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
 
   return (
     <div className="min-h-screen bg-slate-100">
@@ -119,6 +127,16 @@ const UserDashboard = () => {
 
             {open && <span>Back to Home</span>}
           </Link>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-rose-600 transition hover:bg-rose-50"
+          >
+            <LogOut size={19} />
+
+            {open && <span>Logout</span>}
+          </button>
 
         </nav>
 

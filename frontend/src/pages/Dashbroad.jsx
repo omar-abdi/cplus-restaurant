@@ -1,11 +1,19 @@
 import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { LogOut } from "lucide-react";
+import storeUser from "../zustand/user";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = storeUser();
 
   const isActive = (path) => location.pathname === path;
+  const handleLogout = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -149,6 +157,16 @@ const Dashboard = () => {
               </span>
             )}
           </Link>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-rose-600 transition hover:bg-rose-50"
+          >
+            <LogOut size={20} />
+
+            {open && <span className="font-medium">Logout</span>}
+          </button>
 
         </nav>
       </aside>
