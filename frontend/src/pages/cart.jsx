@@ -8,6 +8,7 @@ const Cart = () => {
   const { user } = storeUser();
   const {
     cartItems,
+    updateQuantity,
     createOrder,
     creatingOrder,
     orderError,
@@ -78,14 +79,36 @@ const Cart = () => {
 
                     <p>${item.price}</p>
 
-                    <p>
-                      Quantity: {item.quantity}
-                    </p>
+                    <div className="mt-3 flex items-center gap-3">
+                      <span className="text-sm text-gray-600">Quantity</span>
+                      <div className="flex items-center overflow-hidden rounded-lg border border-gray-200">
+                        <button
+                          type="button"
+                          onClick={() => updateQuantity(item.product, item.itemModel, item.quantity - 1)}
+                          disabled={item.quantity === 1}
+                          aria-label={`Decrease ${item.name} quantity`}
+                          className="h-8 w-8 text-lg font-bold text-gray-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-35"
+                        >
+                          −
+                        </button>
+                        <span className="flex h-8 min-w-9 items-center justify-center border-x border-gray-200 text-sm font-semibold">
+                          {item.quantity}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => updateQuantity(item.product, item.itemModel, item.quantity + 1)}
+                          aria-label={`Increase ${item.name} quantity`}
+                          className="h-8 w-8 text-lg font-bold text-gray-700 transition hover:bg-gray-100"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <p className="font-bold">
-                  ${item.price * item.quantity}
+                <p className="font-bold text-lg">
+                  ${(item.price * item.quantity).toFixed(2)}
                 </p>
               </div>
             ))}
@@ -94,7 +117,7 @@ const Cart = () => {
           <div className="mt-6 border-t pt-4">
             <div className="flex justify-between text-xl font-bold">
               <span>Total</span>
-              <span>${totalPrice}</span>
+              <span>${totalPrice.toFixed(2)}</span>
             </div>
 
             {!user && (

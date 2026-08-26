@@ -63,6 +63,20 @@ const storeOrders = create(
         }));
       },
 
+      updateQuantity: (productId, itemModel, quantity) => {
+        const nextQuantity = Number(quantity);
+
+        if (!Number.isInteger(nextQuantity) || nextQuantity < 1) return;
+
+        set((state) => ({
+          cartItems: state.cartItems.map((item) =>
+            item.product === productId && item.itemModel === itemModel
+              ? { ...item, quantity: nextQuantity }
+              : item
+          ),
+        }));
+      },
+
       clearCart: () =>
         set({
           cartItems: [],
