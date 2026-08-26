@@ -2,11 +2,14 @@
 import { useEffect } from 'react'
 import storeMeals from "../zustand/meals"
 import storeOrders from '../zustand/orderers'
+// use here funtio get product by id imfrm zustand 
+import { useNavigate } from 'react-router-dom'
+
 
 function MealsComponent() {
-
   const { meals, getMeals } = storeMeals()
   const { cartItems, addToCart } = storeOrders()
+  const navigate = useNavigate()
 
   useEffect(() => {
     getMeals()
@@ -63,6 +66,14 @@ function MealsComponent() {
                   {cartItems.find((item) => item.product === (meal._id || meal.id))
                     ? 'Added to cart'
                     : 'Add to cart'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => navigate(`/meals/${meal._id || meal.id}`)}
+                  className="mt-3 flex items-center gap-2 rounded-full border border-[#2B1B14] px-4 py-2 text-sm font-medium text-[#2B1B14] transition hover:border-[#C98A3D] hover:bg-[#C98A3D] hover:text-white"
+                >
+                  View product
                 </button>
               </div>
 

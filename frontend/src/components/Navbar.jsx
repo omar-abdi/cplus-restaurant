@@ -1,103 +1,150 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Home,
   Utensils,
   LogIn,
   UserPlus,
   Info,
+  ShoppingCart,
+  LayoutDashboard,
 } from "lucide-react";
 
-//cart icon
-import { ShoppingCart } from "lucide-react";
+import storeOrders from "../zustand/orderers";
 
 const Navbar = () => {
+  const location = useLocation();
+
+  const { cartItems } = storeOrders();
+
+  const cartCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const navLink = (path) =>
+    `flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200 ${
+      location.pathname === path
+        ? "bg-orange-50 text-orange-600"
+        : "text-slate-600 hover:bg-slate-50 hover:text-orange-500"
+    }`;
+
   return (
-    <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-md">
+    <nav className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 shadow-sm backdrop-blur-xl">
 
-      {/* Logo + Name */}
-      <Link to="/" className="flex items-center gap-3">
-        <img
-          src="/logo.png"
-          alt="Cplus Restaurant"
-          className="w-12 h-12 rounded-full object-cover"
-        />
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
 
-        <h1 className="text-xl font-bold text-gray-800">
-          Cplus <span className="text-orange-500">Restaurant</span>
-        </h1>
-      </Link>
-
-      {/* Navigation */}
-      <div className="flex items-center gap-8">
-
+        {/* ================= LOGO ================= */}
         <Link
           to="/"
-          className="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition"
+          className="flex items-center gap-3"
         >
-          <Home size={19} />
-          Home
-        </Link>
-        <Link
-          to="/dashboard"
-          className="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition"
-        >
-          <Home size={19} />
-          dashboard
+          <div className="relative">
+            <img
+              src="/logo.png"
+              alt="Cplus Restaurant"
+              className="h-11 w-11 rounded-full object-cover ring-2 ring-orange-100"
+            />
+
+            <span className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-white bg-emerald-500" />
+          </div>
+
+          <div className="hidden sm:block">
+            <h1 className="text-lg font-extrabold tracking-tight text-slate-900">
+              Cplus{" "}
+              <span className="text-orange-500">
+                Restaurant
+              </span>
+            </h1>
+
+            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-slate-400">
+              Taste the difference
+            </p>
+          </div>
         </Link>
 
-        <Link
-          to="/meals"
-          className="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition"
-        >
-          <Utensils size={19} />
-          Foods
-        </Link>
-        <Link
-          to="/drinks"
-          className="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition"
-        >
-          <Utensils size={19} />
-         Drinks
-        </Link>
+        {/* ================= NAVIGATION ================= */}
+        <div className="hidden items-center gap-1 md:flex">
 
-        <Link
-          to="/details"
-          className="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition"
-        >
-          <Info size={19} />
-          Details
-        </Link>
+          <Link to="/" className={navLink("/")}>
+            <Home size={17} />
+            Home
+          </Link>
 
+          <Link
+            to="/meals"
+            className={navLink("/meals")}
+          >
+            <Utensils size={17} />
+            Foods
+          </Link>
+
+          <Link
+            to="/drinks"
+            className={navLink("/drinks")}
+          >
+            <Utensils size={17} />
+            Drinks
+          </Link>
+
+          <Link
+            to="/details"
+            className={navLink("/details")}
+          >
+            <Info size={17} />
+            Details
+          </Link>
+
+          <Link
+            to="/dashboard"
+            className={navLink("/dashboard")}
+          >
+            <LayoutDashboard size={17} />
+            Dashboard
+          </Link>
+
+        </div>
+
+        {/* ================= RIGHT SIDE ================= */}
+        <div className="flex items-center gap-2">
+
+          {/* Login */}
+          <Link
+            to="/login"
+            className="hidden items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-orange-500 sm:flex"
+          >
+            <LogIn size={17} />
+            Login
+          </Link>
+
+          {/* Signup */}
+          <Link
+            to="/signup"
+            className="hidden items-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600 sm:flex"
+          >
+            <UserPlus size={17} />
+            Signup
+          </Link>
+
+          {/* Cart */}
+          <Link
+            to="/cart"
+            className="group relative flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500 text-white shadow-md shadow-orange-200 transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-600 hover:shadow-lg"
+          >
+            <ShoppingCart
+              size={19}
+              className="transition-transform group-hover:scale-110"
+            />
+
+            {/* Cart badge */}
+            {cartCount > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-white bg-slate-900 px-1 text-[10px] font-bold text-white">
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            )}
+          </Link>
+
+        </div>
       </div>
-
-      {/* Auth */}
-      <div className="flex items-center gap-3">
-
-        <Link
-          to="/login"
-          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-orange-500 transition"
-        >
-          <LogIn size={18} />
-          Login
-        </Link>
-
-        <Link
-          to="/signup"
-          className="flex items-center gap-2 px-5 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
-        >
-          <UserPlus size={18} />
-          Signup
-        </Link>
-        <Link
-          to="/cart"
-          className="flex items-center gap-2 px-5 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
-        >
-          <ShoppingCart size={18} />
-          cart
-        </Link>
-
-      </div>
-
     </nav>
   );
 };

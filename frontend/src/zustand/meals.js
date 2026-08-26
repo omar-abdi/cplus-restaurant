@@ -37,6 +37,8 @@ const storeMeals = create((set) => ({
       });
     }
   },
+  //get by product id frontend 
+ 
 }));
 
 export default storeMeals;

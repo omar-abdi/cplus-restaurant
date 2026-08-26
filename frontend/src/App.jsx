@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import GetOrders from "./pages/GetOrders";
+import GetProductById from "./pages/getProductById";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/drinks" element={<Drinks />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/meals" element={<MealsComponent />} />
+          <Route path="/meals/:id" element={<GetProductById />} />
 
           {/* Dashboard Parent */}
           <Route path="/dashboard" element={<Dashboard />}>
