@@ -1,4 +1,19 @@
-# Logs
+# Dependencies
+node_modules/
+/node_modules
+
+# Production / Build output
+dist/
+dist-ssr/
+build/
+/public/build
+
+# Environment Variables (Amniga & Secret Keys)
+.env
+.env*
+!.env.example
+
+# Logs & Debugging
 logs
 *.log
 npm-debug.log*
@@ -7,12 +22,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# Editor directories & System files
 .vscode/*
 !.vscode/extensions.json
 .idea
