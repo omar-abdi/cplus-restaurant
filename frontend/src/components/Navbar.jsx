@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import {
   Home,
@@ -7,13 +8,16 @@ import {
   Info,
   ShoppingCart,
   LayoutDashboard,
+  Mail,
 } from "lucide-react";
 
+import storeUser from "../zustand/user";
 import storeOrders from "../zustand/orderers";
 
 const Navbar = () => {
   const location = useLocation();
 
+  const { user } = storeUser();
   const { cartItems } = storeOrders();
 
   const cartCount = cartItems.reduce(
@@ -30,14 +34,10 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 shadow-sm backdrop-blur-xl">
-
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
 
         {/* ================= LOGO ================= */}
-        <Link
-          to="/"
-          className="flex items-center gap-3"
-        >
+        <Link to="/" className="flex items-center gap-3">
           <div className="relative">
             <img
               src="/logo.png"
@@ -70,60 +70,68 @@ const Navbar = () => {
             Home
           </Link>
 
-          <Link
-            to="/meals"
-            className={navLink("/meals")}
-          >
+          <Link to="/meals" className={navLink("/meals")}>
             <Utensils size={17} />
             Foods
           </Link>
 
-          <Link
-            to="/drinks"
-            className={navLink("/drinks")}
-          >
+          <Link to="/drinks" className={navLink("/drinks")}>
             <Utensils size={17} />
             Drinks
           </Link>
 
-          <Link
-            to="/details"
-            className={navLink("/details")}
-          >
+          <Link to="/details" className={navLink("/details")}>
             <Info size={17} />
             Details
           </Link>
 
-          <Link
-            to="/dashboard"
-            className={navLink("/dashboard")}
-          >
-            <LayoutDashboard size={17} />
-            Dashboard
-          </Link>
+          {/* Admin Dashboard - Admin only */}
+          {user?.isAdmin && (
+            <Link
+              to="/dashboard"
+              className={navLink("/dashboard")}
+            >
+              <LayoutDashboard size={17} />
+              Admin Dashboard
+            </Link>
+          )}
 
+          {/* User Dashboard - Logged in users */}
+          {user && (
+            <Link
+              to="/user-dashboard"
+              className={navLink("/user-dashboard")}
+            >
+              <LayoutDashboard size={17} />
+            user Dashboard
+            </Link>
+          )}
         </div>
 
         {/* ================= RIGHT SIDE ================= */}
         <div className="flex items-center gap-2">
 
           {/* Login */}
-          <Link
-            to="/login"
-            className="hidden items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-orange-500 sm:flex"
-          >
-            <LogIn size={17} />
-            Login
-          </Link>
+          {!user && (
+            <Link
+              to="/login"
+              className="hidden items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-orange-500 sm:flex"
+            >
+              <LogIn size={17} />
+              Login
+            </Link>
+          )}
 
           {/* Signup */}
-          <Link
-            to="/signup"
-            className="hidden items-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600 sm:flex"
-          >
-            <UserPlus size={17} />
-            Signup
-          </Link>
+          {!user && (
+            <Link
+              to="/signup"
+              className="hidden items-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600 sm:flex"
+            >
+              <UserPlus size={17} />
+              Signup
+            </Link>
+          )}
 
           {/* Cart */}
           <Link
@@ -135,12 +143,26 @@ const Navbar = () => {
               className="transition-transform group-hover:scale-110"
             />
 
-            {/* Cart badge */}
             {cartCount > 0 && (
               <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-white bg-slate-900 px-1 text-[10px] font-bold text-white">
                 {cartCount > 99 ? "99+" : cartCount}
               </span>
             )}
+          </Link>
+
+          {/* Contact */}
+          <Link
+            to="/contact"
+            className="group flex h-11 items-center gap-2 rounded-xl bg-orange-500 px-4 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-600 hover:shadow-lg"
+          >
+            <Mail
+              size={17}
+              className="transition-transform group-hover:scale-110"
+            />
+
+            <span className="hidden sm:inline">
+              Contact
+            </span>
           </Link>
 
         </div>
@@ -150,3 +172,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+

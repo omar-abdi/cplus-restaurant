@@ -18,6 +18,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import GetOrders from "./pages/GetOrders";
 import GetProductById from "./pages/getProductById";
 import GetDrinkById from "./pages/getDrinkById";
+import Contactpage from "./pages/Contactpage";
+import GetOrderByUser from "./pages/GetOrderByUser";
+import UserDashboard from "./pages/UserDashboard";
 
 const App = () => {
   return (
@@ -26,29 +29,62 @@ const App = () => {
 
       <Routes>
 
-        {/* Public */}
+        {/* ================= PUBLIC ================= */}
+
         <Route path="/" element={<Home />} />
+
         <Route path="/login" element={<Login />} />
+
         <Route path="/signup" element={<Signup />} />
 
-        {/* Protected pages */}
+        <Route path="/contact" element={<Contactpage />} />
+
+
+        {/* ================= PROTECTED ================= */}
+
         <Route element={<ProtectedRoute />}>
 
           <Route path="/details" element={<Details />} />
+
           <Route path="/drinks" element={<Drinks />} />
+
           <Route path="/drinks/:id" element={<GetDrinkById />} />
+
           <Route path="/cart" element={<Cart />} />
+
           <Route path="/meals" element={<MealsComponent />} />
+
           <Route path="/meals/:id" element={<GetProductById />} />
 
-          {/* Dashboard Parent */}
+
+          {/* ================= ADMIN DASHBOARD ================= */}
+
           <Route path="/dashboard" element={<Dashboard />}>
 
-            {/* Dashboard children */}
             <Route path="addfood" element={<Addfood />} />
+
             <Route path="add-drink" element={<Adddrink />} />
+
             <Route path="orders" element={<GetOrders />} />
+
             <Route path="profile" element={<Profile />} />
+
+          </Route>
+
+
+          {/* ================= USER DASHBOARD ================= */}
+
+          <Route path="/user-dashboard" element={<UserDashboard />}>
+
+            <Route
+              path="useorders"
+              element={<GetOrderByUser />}
+            />
+
+            <Route
+              path="profile"
+              element={<Profile />}
+            />
 
           </Route>
 

@@ -74,7 +74,7 @@ function Drinks() {
                 onClick={() => navigate(`/drinks/${drink._id || drink.id}`)}
                 className="mt-3 flex w-full items-center justify-center rounded-xl border border-[#2B1B14] py-2.5 text-sm font-medium text-[#2B1B14] transition hover:border-[#C98A3D] hover:bg-[#C98A3D] hover:text-white"
               >
-                View drink
+                View drink..
               </button>
             </div>
           </div>
