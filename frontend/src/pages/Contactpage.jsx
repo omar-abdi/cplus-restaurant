@@ -111,7 +111,7 @@ function Contactpage() {
                   </p>
 
                   <p className="mt-1 font-medium">
-                    omarcabdi0008@gmail.com
+                    rayanabdi747@gmail.com
                   </p>
                 </div>
               </div>
@@ -127,7 +127,7 @@ function Contactpage() {
                   </p>
 
                   <p className="mt-1 font-medium">
-                    +252 63 0000000
+                    +252 61 2480687
                   </p>
                 </div>
               </div>
@@ -143,7 +143,7 @@ function Contactpage() {
                   </p>
 
                   <p className="mt-1 font-medium">
-                    Mogadishu, Somalia
+                    Mogadishu, Banaadir Digfer
                   </p>
                 </div>
               </div>
