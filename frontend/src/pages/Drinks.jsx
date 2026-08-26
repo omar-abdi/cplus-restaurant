@@ -2,9 +2,11 @@ import { useEffect } from 'react'
 import storeDrinks from "../zustand/drinks"
 import { ShoppingCart, Heart, Star } from 'lucide-react'
 import storeOrders from '../zustand/orderers'
+import { useNavigate } from 'react-router-dom'
 function Drinks() {
   const { drinks, getDrinks } = storeDrinks()
   const { cartItems, addToCart } = storeOrders()
+  const navigate = useNavigate()
 
   useEffect(() => {
     getDrinks()
@@ -65,6 +67,14 @@ function Drinks() {
               >
                 <ShoppingCart className="h-4 w-4" />
                 Add to Cart
+              </button>
+
+              <button
+                type="button"
+                onClick={() => navigate(`/drinks/${drink._id || drink.id}`)}
+                className="mt-3 flex w-full items-center justify-center rounded-xl border border-[#2B1B14] py-2.5 text-sm font-medium text-[#2B1B14] transition hover:border-[#C98A3D] hover:bg-[#C98A3D] hover:text-white"
+              >
+                View drink
               </button>
             </div>
           </div>

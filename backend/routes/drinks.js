@@ -1,9 +1,11 @@
 import {Router} from 'express';
-import {createDrink , getDrinks} from '../controllers/drinks.js';
+import {createDrink , getDrinks , getDrinkById} from '../controllers/drinks.js';
 const router = Router();
 
 router.post("/add",createDrink);
 router.get("/get" , getDrinks);
+
+router.get("/get/:id" , getDrinkById);
 
 
 
