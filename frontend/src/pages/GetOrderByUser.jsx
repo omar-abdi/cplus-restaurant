@@ -296,7 +296,7 @@ const GetOrderByUser = () => {
 
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-orange-700">
-                      Order total
+                      Order totalPrice
                     </p>
 
                     <p className="mt-1 text-2xl font-bold text-orange-600">

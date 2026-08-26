@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Mail, Lock, LogIn, Eye, EyeOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import storeUser from '../zustand/user'
-
+import {Link} from 'react-router-dom'
 function Login() {
   const navigate = useNavigate()
   const { Login, loading, error } = storeUser()
@@ -108,7 +108,13 @@ function Login() {
             ) : (
               "Soo Gal"
             )}
+
           </button>
+          <span>
+            <Link to="/signup" className="text-sm font-semibold text-slate-700 transition hover:text-slate-900">
+              Don't have an account? Sign up
+            </Link>
+          </span>
         </form>
 
       </div>

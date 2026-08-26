@@ -344,7 +344,7 @@ const GetOrders = () => {
                         <div className="flex min-w-0 items-center gap-3">
 
                           <div className="flex h-9 min-w-9 items-center justify-center rounded-xl bg-orange-100 px-2 text-xs font-bold text-orange-600">
-                            {item.quantity}x
+                         quantity   {item.quantity} 
                           </div>
 
                           <div className="min-w-0">
@@ -362,7 +362,7 @@ const GetOrders = () => {
 
                         </div>
 
-                        <p className="shrink-0 text-sm font-bold text-slate-800">
+                        <p className="shrink-0 text-sm font-bold text-blue-900">
                           {formatMoney(
                             item.price * item.quantity
                           )}
