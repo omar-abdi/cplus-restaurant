@@ -104,7 +104,7 @@ const Details = () => {
               great taste while giving every customer a comfortable
               and welcoming experience.
             </p>
-
+ 
             <p className="mt-4 leading-8 text-slate-600">
               We are open 24 hours, so you can enjoy your favorite
               meals whenever you need them.
