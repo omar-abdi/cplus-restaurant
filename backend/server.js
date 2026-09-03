@@ -3,8 +3,9 @@ import dotenv from 'dotenv';
 import connectDB from './db.js';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.js';
-import foodRoutes from './routes/food.js';
+
 import drinksRoutes from './routes/drinks.js';
+import foodRoutes from './routes/food.js';
 import orderRoutes from './routes/order.js';
 import contactRoutes from './routes/contact.js';
 import cors from 'cors';
