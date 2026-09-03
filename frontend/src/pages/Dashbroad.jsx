@@ -3,7 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import storeUser from "../zustand/user";
 
-const Dashboard = () => {
+const Dashbroad = () => {
   const [open, setOpen] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
@@ -200,4 +200,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Dashbroad;
