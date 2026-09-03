@@ -13,7 +13,9 @@ const storeMeals = create((set) => ({
     });
 
     try {
-      const res = await axios.get("http://localhost:5000/api/food/product");
+     const res = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/food/product`
+);
 
       // Log tan si aad console-ka uga aragto waxa uu API-gu soo celinayo
       console.log("Backend Response:", res.data);

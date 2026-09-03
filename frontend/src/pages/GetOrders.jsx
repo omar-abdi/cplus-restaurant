@@ -78,7 +78,7 @@ const GetOrders = () => {
         setError("");
 
         const response = await axios.get(
-          "http://localhost:5000/api/order/all",
+          `${import.meta.env.VITE_API_URL}/api/order/all`,
           {
             withCredentials: true,
           }

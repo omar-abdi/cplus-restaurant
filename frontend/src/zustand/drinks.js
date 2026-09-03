@@ -13,7 +13,9 @@ const storeDrinks = create((set) => ({
     });
 
     try {
-      const res = await axios.get("http://localhost:5000/api/drinks/get");
+     const res = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/drinks/get`
+);
 
       console.log("Backend Response:", res.data);
 

@@ -121,7 +121,7 @@ const Addfood = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/food/createmenu",
+        `${import.meta.env.VITE_API_URL}/api/food/createmenu`,
         {
           ...formData,
           price: Number(formData.price),
@@ -150,7 +150,7 @@ const Addfood = () => {
 
       setError(
         err.response?.data?.message ||
-          "Failed to add food"
+        "Failed to add food"
       );
     } finally {
       setLoading(false);
@@ -332,8 +332,8 @@ const Addfood = () => {
           {loading
             ? "Saving..."
             : uploading
-            ? "Uploading image..."
-            : "Save Food"}
+              ? "Uploading image..."
+              : "Save Food"}
         </button>
       </form>
     </div>

@@ -10,7 +10,7 @@ const storeUser = create((set) => ({
 		set({loading: true, error: null})
 
 		try {
-			const res = await axios.post('http://localhost:5000/api/user/signup', formData)
+			const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/signup`, formData)
 			set({
                 user: res.data,
                 loading: false})
@@ -25,7 +25,7 @@ const storeUser = create((set) => ({
 Login: async (email, password) => {
 		set({loading: true, error: null})
 		try {
-			const res = await axios.post('http://localhost:5000/api/user/login', {email, password}, { withCredentials: true })
+			const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/login`, {email, password}, { withCredentials: true })
 			set({
                 user: res.data.data,
                 loading: false})
@@ -45,7 +45,7 @@ Login: async (email, password) => {
 		set({ loading: true, error: null })
 
 		try {
-			const res = await axios.get('http://localhost:5000/api/user/all', {
+			const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/all`, {
 				withCredentials: true,
 			})
 
