@@ -9,7 +9,7 @@ import Details from "./pages/Details";
 import Drinks from "./pages/Drinks";
 import Cart from "./pages/cart";
 
-import Dashbroad from "./pages/dashbroad";
+import Dashbroad from "./pages/Dashbroad";
 import Addfood from "./pages/Addfood";
 import Adddrink from "./pages/Adddrink";
 import Profile from "./pages/Profile";
