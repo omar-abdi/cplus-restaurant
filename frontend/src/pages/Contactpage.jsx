@@ -111,7 +111,7 @@ function Contactpage() {
                   </p>
 
                   <p className="mt-1 font-medium">
-                    rayanabdi747@gmail.com
+                    omarcabdi0008@gmail.com
                   </p>
                 </div>
               </div>
@@ -127,7 +127,7 @@ function Contactpage() {
                   </p>
 
                   <p className="mt-1 font-medium">
-                    +252 61 2480687
+                    +252 61 2 07 13 07
                   </p>
                 </div>
               </div>

@@ -60,11 +60,11 @@ function Signup() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#2b1b14]/65">Full name</label>
-                  <input id="name" required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full border-b border-[#2b1b14]/20 bg-transparent px-0 py-3 text-sm outline-none transition placeholder:text-[#2b1b14]/25 focus:border-[#c98a3d]" placeholder="Amina Hassan" />
+                  <input id="name" required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full border-b border-[#2b1b14]/20 bg-transparent px-0 py-3 text-sm outline-none transition placeholder:text-[#2b1b14]/25 focus:border-[#c98a3d]" placeholder="your name" />
                 </div>
                 <div>
                   <label htmlFor="phone" className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#2b1b14]/65">Phone</label>
-                  <input id="phone" required type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full border-b border-[#2b1b14]/20 bg-transparent px-0 py-3 text-sm outline-none transition placeholder:text-[#2b1b14]/25 focus:border-[#c98a3d]" placeholder="+252 61 000 0000" />
+                  <input id="phone" required type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full border-b border-[#2b1b14]/20 bg-transparent px-0 py-3 text-sm outline-none transition placeholder:text-[#2b1b14]/25 focus:border-[#c98a3d]" placeholder="+252 61 xxxxxxxx" />
                 </div>
               </div>
               <div>

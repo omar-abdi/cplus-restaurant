@@ -19,12 +19,11 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
+
 app.use(cors({
   origin: true,
   credentials: true,
 }));
-
-const PORT = process.env.PORT || 8000;
 
 app.use('/api/user', userRoutes);
 app.use('/api/food', foodRoutes);
@@ -32,7 +31,6 @@ app.use('/api/drinks', drinksRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/contact', contactRoutes);
 
-app.listen(PORT, async () => {
-  await connectDB();
-  console.log(`Server is running on port ${PORT}`);
-});
+connectDB();
+
+export default app;
