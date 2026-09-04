@@ -40,7 +40,7 @@ const GetOrderByUser = () => {
         setError("");
 
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/order/user/${user._id}`,
+          `http://localhost:5000/api/order/user/${user._id}`,
           {
             withCredentials: true,
           }

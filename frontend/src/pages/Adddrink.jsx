@@ -122,7 +122,7 @@ const Adddrink = () => {
 
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/drinks/add`,
+        "http://localhost:5000/api/drinks/add",
         {
           ...formData,
           price: Number(formData.price),

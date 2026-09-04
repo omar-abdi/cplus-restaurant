@@ -37,7 +37,7 @@ function Contactpage() {
       setError("");
 
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/contact/send`,
+        "http://localhost:5000/api/contact/send",
         contact
       );
 

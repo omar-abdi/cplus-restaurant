@@ -18,7 +18,7 @@ const UpdateUser = () => {
     const loadUser = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/all`, { withCredentials: true });
+        const response = await axios.get("http://localhost:5000/api/user/all", { withCredentials: true });
         const user = response.data.users?.find((item) => item._id === id);
 
         if (!user) {
@@ -48,7 +48,7 @@ const UpdateUser = () => {
       setSaving(true);
       setError("");
       setSuccess("");
-      await axios.put(`${import.meta.env.VITE_API_URL}/api/user/${id}`, form, { withCredentials: true });
+      await axios.put(`http://localhost:5000/api/user/${id}`, form, { withCredentials: true });
       setSuccess("User updated successfully.");
       setTimeout(() => navigate("/dashboard/users"), 800);
     } catch (requestError) {

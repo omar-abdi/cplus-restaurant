@@ -15,7 +15,7 @@ const GetProductById = () => {
     const getProduct = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/drinks/get/${id}`);
+        const response = await axios.get(`http://localhost:5000/api/drinks/get/${id}`);
         setProduct(response.data.data);
       } catch (requestError) {
         setError(requestError.response?.data?.message || "Product could not be loaded.");

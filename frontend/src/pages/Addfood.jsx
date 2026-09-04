@@ -121,7 +121,7 @@ const Addfood = () => {
 
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/food/createmenu`,
+        "http://localhost:5000/api/food/createmenu",
         {
           ...formData,
           price: Number(formData.price),
