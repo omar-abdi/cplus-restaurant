@@ -40,10 +40,9 @@ if (process.env.NODE_ENV === 'production') {
   // Wuxuu ka baxayaa backend wuxuuna ka dhex raadinayaa frontend/dist
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
-  });
-}
+ app.get('{*path}', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 // --------------------------------------------
 
 app.listen(PORT, async () => {
