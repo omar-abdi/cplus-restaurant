@@ -9,6 +9,7 @@ import orderRoutes from './routes/order.js';
 import contactRoutes from './routes/contact.js';
 import cors from 'cors';
 import dns from 'dns';
+import path from 'path'; // <--- 1. Halkan lagu daray
 
 // DNS Fix MongoDB Atlas SRV Error
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
@@ -31,6 +32,19 @@ app.use('/api/food', foodRoutes);
 app.use('/api/drinks', drinksRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/contact', contactRoutes);
+
+// --- KOODHKA MACALINKA (PRODUCTION SETUP) ---
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === 'production') {
+  // Wuxuu ka baxayaa backend wuxuuna ka dhex raadinayaa frontend/dist
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
+  });
+}
+// --------------------------------------------
 
 app.listen(PORT, async () => {
   await connectDB();
