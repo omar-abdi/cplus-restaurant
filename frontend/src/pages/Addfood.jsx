@@ -1,6 +1,6 @@
 
 import { useRef, useState } from "react";
-import axios from "axios";
+import API from "../api.js";
 import { ImagePlus, Upload, X } from "lucide-react";
 
 const Addfood = () => {
@@ -120,8 +120,8 @@ const Addfood = () => {
     setError("");
 
     try {
-      await axios.post(
-        "http://localhost:5000/api/food/createmenu",
+      await API.post(
+        "/food/createmenu",
         {
           ...formData,
           price: Number(formData.price),

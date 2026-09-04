@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api.js";
 import {
   CalendarDays,
   ChevronRight,
@@ -77,8 +77,8 @@ const GetOrders = () => {
         setLoading(true);
         setError("");
 
-        const response = await axios.get(
-          "http://localhost:5000/api/order/all",
+        const response = await API.get(
+          "/order/all",
           {
             withCredentials: true,
           }

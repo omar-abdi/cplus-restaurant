@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
+import API from "../api.js";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
 import storeOrders from "../zustand/orderers";
 
@@ -15,7 +15,7 @@ const GetProductById = () => {
     const getProduct = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:5000/api/food/product/${id}`);
+        const response = await API.get(`/food/product/${id}`);
         setProduct(response.data.data);
       } catch (requestError) {
         setError(requestError.response?.data?.message || "Product could not be loaded.");

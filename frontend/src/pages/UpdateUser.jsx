@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, Save, ShieldCheck, UserRound } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import API from "../api.js";
 
 const emptyForm = { name: "", email: "", phone: "", address: "", isAdmin: false };
 
@@ -18,7 +18,7 @@ const UpdateUser = () => {
     const loadUser = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:5000/api/user/all", { withCredentials: true });
+        const response = await API.get("/user/all");
         const user = response.data.users?.find((item) => item._id === id);
 
         if (!user) {
@@ -48,7 +48,7 @@ const UpdateUser = () => {
       setSaving(true);
       setError("");
       setSuccess("");
-      await axios.put(`http://localhost:5000/api/user/${id}`, form, { withCredentials: true });
+      await API.put(`/user/${id}`, form);
       setSuccess("User updated successfully.");
       setTimeout(() => navigate("/dashboard/users"), 800);
     } catch (requestError) {

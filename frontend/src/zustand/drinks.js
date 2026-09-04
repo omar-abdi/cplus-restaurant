@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import axios from "axios";
+import API from "../api.js";
 
 const storeDrinks = create((set) => ({
   drinks: [],
@@ -13,8 +13,8 @@ const storeDrinks = create((set) => ({
     });
 
     try {
-     const res = await axios.get(
-  "http://localhost:5000/api/drinks/get"
+      const res = await API.get(
+    "/drinks/get"
 );
 
       console.log("Backend Response:", res.data);

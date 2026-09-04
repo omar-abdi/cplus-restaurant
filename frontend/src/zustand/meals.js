@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import axios from "axios";
+import API from "../api.js";
 
 const storeMeals = create((set) => ({
   meals: [],
@@ -13,8 +13,8 @@ const storeMeals = create((set) => ({
     });
 
     try {
-     const res = await axios.get(
-  "http://localhost:5000/api/food/product"
+      const res = await API.get(
+    "/food/product"
 );
 
       // Log tan si aad console-ka uga aragto waxa uu API-gu soo celinayo

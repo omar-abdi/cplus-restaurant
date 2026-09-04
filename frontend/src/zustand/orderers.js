@@ -1,8 +1,6 @@
-import axios from "axios";
+import API from "../api.js";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-const API_URL = "http://localhost:5000/api/order";
 
 const storeOrders = create(
   persist(
@@ -101,8 +99,8 @@ const storeOrders = create(
         });
 
         try {
-          const response = await axios.post(
-            `${API_URL}/createorder`,
+          const response = await API.post(
+            "/order/createorder",
             {
               items: cartItems.map(
                 ({ product, itemModel, quantity }) => ({
@@ -140,7 +138,7 @@ const storeOrders = create(
         set({ loadingOrders: true, orderError: null });
 
         try {
-          const response = await axios.get(`${API_URL}/user/${userId}`, {
+          const response = await API.get(`/order/user/${userId}`, {
             withCredentials: true,
           });
 
