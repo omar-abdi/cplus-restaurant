@@ -9,7 +9,7 @@ import orderRoutes from './routes/order.js';
 import contactRoutes from './routes/contact.js';
 import cors from 'cors';
 import dns from 'dns';
-import path from 'path'; // <--- 1. Halkan lagu daray
+import path from 'path';
 
 // DNS Fix MongoDB Atlas SRV Error
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
@@ -33,17 +33,18 @@ app.use('/api/drinks', drinksRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/contact', contactRoutes);
 
-// --- KOODHKA MACALINKA (PRODUCTION SETUP) ---
+// --- PRODUCTION SETUP ---
 const __dirname = path.resolve();
 
 if (process.env.NODE_ENV === 'production') {
-  // Wuxuu ka baxayaa backend wuxuuna ka dhex raadinayaa frontend/dist
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  // 1. Serving static files
+  app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
- app.get('{*path}', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-});
-// --------------------------------------------
+  // 2. Catch-all route oo loogu talagalay Express v5 (RegExp)
+  app.get(/(.*)/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/dist/index.html'));
+  });
+} // <-- Bracket-kii halkan ka vanteeda ahaa waa la xidhay
 
 app.listen(PORT, async () => {
   await connectDB();
